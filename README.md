@@ -12,3 +12,8 @@
 ## 01_factory_girls
   Use gems to help us generate fake data.
   Please run `bundle install` to install it.
+
+## 02_stubs
+  Stub methods.
+  Also we introduce `shoulda-matchers` to make test easier.
+  Please run `bundle install` to install it.
