@@ -7,8 +7,8 @@ module API
         subject { get :index }
 
         before do
-          Post.create(title: 'first post', content: 'content')
-          Post.create(title: 'second post', content: 'content')
+          create(:post, title: 'first post')
+          create(:post, title: 'second post')
         end
 
         it 'returns posts' do
@@ -23,7 +23,7 @@ module API
       describe 'GET #show' do
         subject { get :show, params: { id: post.id } }
 
-        let(:post) { Post.create(title: 'title', content: 'content') }
+        let(:post) { create(:post) }
 
         it 'returns the post' do
           subject
@@ -36,7 +36,7 @@ module API
       describe 'POST #create' do
         subject { post :create, params: { post: post_params } }
 
-        let(:post_params) { { title: 'my title', content: 'content' } }
+        let(:post_params) { attributes_for(:post, title: 'my title') }
 
         context 'with valid params' do
           it 'returns the created post' do
@@ -48,7 +48,7 @@ module API
         end
 
         context 'with invalid params' do
-          let(:post_params) { { title: 'my title', content: '' } }
+          let(:post_params) { attributes_for(:post, content: '') }
 
           it 'returns errors' do
             subject
@@ -62,8 +62,8 @@ module API
       describe 'PUT #update' do
         subject { put :update, params: { id: post.id, post: post_params } }
 
-        let(:post) { Post.create(title: 'title', content: 'content') }
-        let(:post_params) { { title: 'new title', content: post.content } }
+        let(:post) { create(:post) }
+        let(:post_params) { attributes_for(:post, title: 'new title') }
 
         context 'with valid params' do
           it 'returns the post' do
@@ -75,7 +75,7 @@ module API
         end
 
         context 'with invalid params' do
-          let(:post_params) { { title: '', content: post.content } }
+          let(:post_params) { attributes_for(:post, title: '') }
 
           it 'returns errors' do
             subject
@@ -89,7 +89,7 @@ module API
       describe 'DELETE #destroy' do
         subject { delete :destroy, params: { id: post.id } }
 
-        let(:post) { Post.create(title: 'title', content: 'content') }
+        let(:post) { create(:post) }
 
         it 'returns nothing' do
           subject
