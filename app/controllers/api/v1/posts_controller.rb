@@ -35,7 +35,7 @@ module API
         post = Post.find(params[:id])
         post.destroy
 
-        render status: 204
+        head :no_content
       end
 
       private
