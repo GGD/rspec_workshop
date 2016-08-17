@@ -8,3 +8,7 @@
 
 ## 00_CRUD
   basic API CRUD
+
+## 01_factory_girls
+  Use gems to help us generate fake data.
+  Please run `bundle install` to install it.
